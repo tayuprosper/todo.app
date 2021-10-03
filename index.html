@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+<style type="text/css">
+body{
+font-family: 'Ubuntu', sans-serif;
+}
+input{
+font-size: 16px;
+text-align: center;
+width: 50%;
+border:none;
+height: 3.5vh;
+border: 5px solid #21BD5C;
+}
+.added{
+font-wight: bolder;
+display: inline;
+width: 25%;
+height: 5vh;
+font-family: 'Ubuntu', sans-serif;
+background-color: #21BD5C;
+border: 5px solid #21BD5C;
+}
+table, th, td{
+border: 5px solid white;
+border-collapse: collapse;
+width: 100%;
+}
+table, td{
+font-size: 30px;
+height: 5vh;
+background-color: #21BD5C;
+width: calc (100% / 3);
+}
+button{
+height: 100%;
+width: 100%;
+}
+.adde{
+display: none;
+}
+.visible{
+display: inline;
+width: 25%;
+height: 5vh;
+font-family: 'Ubuntu', sans-serif;
+background-color: #21BD5C;
+border: 5px solid #21BD5C;
+display: block;
+}
+span{
+color: #21BD5C;
+}
+caption{
+font-size: 30px;
+font-weight: bolder;
+
+}
+p{
+color: red;
+}
+</style>
+</head>
+<body onLoad="restoreTodo()">
+
+	<br><br><br><div>
+		<center><input placeholder="Enter an item..."type="text" id="todo"><button class="added">Add Todo</button></center>
+		<p></p>
+	</div>
+<br><br><br><br>
+<table>
+<caption><span>Todo</span>List</caption>
+<tbody class="tbody">
+
+</tbody>
+</table>
+<button onClick="clearTodo()" id="showbut" class="adde">Clear List</button>
+<script type="text/javascript">
+let tableBody = document.querySelector(".tbody")
+let table = document.querySelector("table");
+let button = document.querySelector("button")
+
+button.addEventListener("click",()=>{
+let input = document.getElementById("todo")
+if (input.value == ""){
+document.querySelector("p").innerHTML =  "Please enter an item"
+}else{
+var newRow = table.insertRow(0)
+
+ var cell1 = newRow.insertCell(0)
+ var cell2 = newRow.insertCell(1)
+ 
+ cell1.innerHTML = input.value;
+ cell2.innerHTML = '<button onClick="thisFunc()">Delete</button>'
+  localStorage.setItem("newtodo", tableBody.innerHTML)
+  let display = document.getElementById("showbut");
+  display.classList.add("visible")
+  document.querySelector("p").innerHTML =  "";
+ }
+ })
+ function restoreTodo(){
+ tableBody.innerHTML = localStorage.getItem("newtodo")
+ }
+ function clearTodo(){
+ let display = document.getElementById("showbut")
+ display.classList.remove("visible");
+ localStorage.clear()
+tableBody.innerHTML = "" ;
+ }
+ function thisFunc(){
+ table.deleteRow(0);
+ }
+
+ 
+</script>
+</body>
+</html>
